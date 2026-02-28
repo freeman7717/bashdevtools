@@ -11,7 +11,7 @@ import streamlit as st
 st.set_page_config(page_title="Рынок электроснабжения UI", layout="wide")
 
 API_BASE = os.getenv("API_BASE", "http://127.0.0.1:8000")
-TIMEOUT = 15
+TIMEOUT = 120
 
 
 def parse_api_error(response: requests.Response) -> str:

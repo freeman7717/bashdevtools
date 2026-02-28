@@ -67,6 +67,22 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Запуск приложения на платформе Render
+
+Для запуска сервера FastAPI осущевстляется запрос по адресу:
+
+```text
+https://electricity-api-w47m.onrender.com/health
+```
+
+Подключение к приложению Streamlit осущевстляется по адресу: 
+
+```text
+https://bashdevtools-frontend.onrender.com/
+```
+
+Если хотите запустить приложение локально, следуйте следующей инструкции:
+
 ## Запуск локального backend
 
 Из корня проекта:

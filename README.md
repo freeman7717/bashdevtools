@@ -72,7 +72,7 @@ pip install -r requirements.txt
 Из корня проекта:
 
 ```bash
-uvicorn backend.main:app --reload
+uvicorn backend.main:app --reload --host 0.0.0.0
 ```
 
 Backend будет доступен по адресу:
@@ -97,19 +97,19 @@ streamlit run frontend/app.py
 
 По умолчанию frontend ожидает backend по адресу `http://localhost:8000`.
 
-Если нужен другой адрес API, можно задать переменную окружения API_URL.
+Если нужен другой адрес API, можно задать переменную окружения API_BASE.
 
 ### Windows (PowerShell)
 
 ```powershell
-$env:API_URL="http://127.0.0.1:8000"
+$env:API_BASE="http://127.0.0.1:8000"
 streamlit run frontend/app.py
 ```
 
 ### Linux / macOS
 
 ```bash
-API_URL=http://127.0.0.1:8000 streamlit run frontend/app.py
+API_BASE=http://127.0.0.1:8000 streamlit run frontend/app.py
 ```
 
 ## Формат записи для POST /records

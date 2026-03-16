@@ -1,0 +1,33 @@
+services:
+  fastapi:
+    user: "1000:1000"
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: electricity_server
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./data.csv:/app/data.csv
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8888/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  streamlit:
+    user: "1000:1000"
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: electricity_dashboard
+    ports:
+      - "8889:8889"
+    environment:
+      - API_BASE=http://fastapi:8888
+    depends_on:
+      fastapi:
+        condition: service_healthy
+    restart: unless-stopped

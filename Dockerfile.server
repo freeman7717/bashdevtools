@@ -1,0 +1,18 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements-server.txt .
+RUN pip install --no-cache-dir -r requirements-server.txt
+
+COPY main.py .
+
+# Create empty data.csv with headers if not mounted
+RUN echo "id,timestep,consumption_eur,consumption_sib,price_eur,price_sib" > /app/data.csv
+
+EXPOSE 8888
+
+HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=5 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8888/health')"
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8888"]
